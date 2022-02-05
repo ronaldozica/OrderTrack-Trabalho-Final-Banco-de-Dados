@@ -8,15 +8,15 @@ import LoginMenu from './LoginMenu/LoginMenu';
 import LoggedInMenu from './LoggedInMenu/LoggedInMenu';
 
 function App() {
-  // const [data, setData] = React.useState(null);
+  const [data, setData] = React.useState("");
   const [showLoginMenu, setShowLoginMenu] = React.useState(false);
   const [ isLoggedIn, setIsLoggedIn ] = React.useState(false);
 
-  // function requestSQLConnection() {
-  //   fetch("/api")
-  //     .then((res) => res.json())
-  //     .then((data) => setData(data.message));
-  // }
+  if(!data){
+    fetch("/api")
+        .then((res) => res.json())
+        .then((data) => setData(data.message));
+  }
 
   return (
     <MyContext.Provider value={{ showLoginMenu, setShowLoginMenu, isLoggedIn, setIsLoggedIn }}>
