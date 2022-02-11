@@ -11,6 +11,7 @@ function App() {
   const [data, setData] = React.useState("");
   const [showLoginMenu, setShowLoginMenu] = React.useState(false);
   const [ isLoggedIn, setIsLoggedIn ] = React.useState(false);
+  const [func, setFunc] = React.useState("");
 
   if(!data){
     fetch("/api")
@@ -19,7 +20,7 @@ function App() {
   }
 
   return (
-    <MyContext.Provider value={{ showLoginMenu, setShowLoginMenu, isLoggedIn, setIsLoggedIn }}>
+    <MyContext.Provider value={{ showLoginMenu, setShowLoginMenu, isLoggedIn, setIsLoggedIn, func, setFunc }}>
       {
         isLoggedIn ?
           <LoggedInMenu/>

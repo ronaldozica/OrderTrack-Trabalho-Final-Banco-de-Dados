@@ -2,10 +2,14 @@ import TextField from "@material-ui/core/TextField";
 import React, { useState } from "react";
 import { Button, Paper } from "@material-ui/core";
 import { Dropdown } from 'react-dropdown-now';
+import MyContext from '../contexts/myContext';
+import { useContext } from 'react';
 
 // https://blog.logrocket.com/using-material-ui-with-react-hook-form/
 
 const TextForm = () => {
+    const { func } = useContext(MyContext);
+
     const [textValue, setTextValue] = useState("");
     const [itemQuantity, setItemQuantity] = useState(0);
 
@@ -37,7 +41,8 @@ const TextForm = () => {
 
     return (
         <div>
-            <h2>Insira o número da mesa :</h2>
+            <h1> Olá {func}! </h1>
+            <h2> Insira o número da mesa: </h2>
 
             <Paper>
                 <TextField
