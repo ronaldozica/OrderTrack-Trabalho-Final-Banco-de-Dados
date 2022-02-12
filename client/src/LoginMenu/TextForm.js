@@ -26,7 +26,7 @@ const TextForm = () => {
                 fetch("/funcionarios")
                     .then((res) => {
                         res.json().then(response => {
-                            console.log(response);
+                            //console.log(response);
                             response.message.rows.forEach(rowsIt => {
                                 if(rowsIt.cracha === textValue){
                                     setFunc((rowsIt.nome).toString());

@@ -11,7 +11,6 @@ const TextForm = () => {
     const { func } = useContext(MyContext);
 
     const [textValue, setTextValue] = useState("");
-    const [produtos, setProdutos] = useState({});
     const [itemQuantity, setItemQuantity] = useState(0);
 
     const onTextChange = (e) => setTextValue(e.target.value);
@@ -39,16 +38,6 @@ const TextForm = () => {
     const optionsFirstItem = require('./optionsFirstItem');
 
     let iterateItems = itemQuantity;
-
-    if(!produtos){
-        fetch("/produtos")
-            .then((res) => {
-                res.json().then(response => {
-                    console.log(response);
-                    setProdutos(response.rows)
-                })
-            })
-    }
 
     return (
         <div>

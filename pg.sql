@@ -27,7 +27,7 @@ CREATE TABLE funcionario (
     cpf            NUMERIC(11) NOT NULL,
     nome           VARCHAR(70) NOT NULL,
     datanascimento DATE,
-    cargoid        NUMERIC(6) NOT NULL,
+    id_cargo        NUMERIC(6) NOT NULL,
     cpfgerente     NUMERIC(11),
     sexo           VARCHAR(1)
 );
@@ -69,7 +69,7 @@ ALTER TABLE produto ADD CONSTRAINT valor_prod_ck CHECK ( valor >= 0 );
 ALTER TABLE produto ADD CONSTRAINT produto_pk PRIMARY KEY ( id_produto );
 
 ALTER TABLE funcionario
-    ADD CONSTRAINT funcionario_cargo_fk FOREIGN KEY ( cargoid )
+    ADD CONSTRAINT funcionario_cargo_fk FOREIGN KEY ( id_cargo )
         REFERENCES cargo ( id_cargo );
 
 ALTER TABLE funcionario
@@ -112,8 +112,16 @@ insert into categoria values (2, 'Bebida');
 insert into categoria values (3, 'Doce');
 insert into categoria values (4, 'Refeição pronta');
 insert into categoria values (5, 'Pipoca');
+insert into categoria values (6, 'Café');
 
-select * from produto p join categoria c on p.id_categoria=c.id_categoria where c.id_categoria=1;
+select * from produto p right join categoria c on p.id_categoria=c.id_categoria;
+select * from categoria c left join produto p on c.id_categoria=p.id_categoria;
+
+select * from produto;
+select * from categoria;
+select * from funcionario;
+select * from cargo;
+select * from item;
 
 insert into produto values (11, 'Enrolado de presunto', 2.50, 1);
 insert into produto values (12, 'Enrolado de queijo', 3.50, 1);
