@@ -9,18 +9,18 @@ drop table categoria;
 
 -- Criação das tabelas
 CREATE TABLE cargo (
-    id        NUMERIC(6) NOT NULL,
-    descricao VARCHAR(80) NOT NULL
+    id_cargo   NUMERIC(6) NOT NULL,
+    nome_cargo VARCHAR(80) NOT NULL
 );
 
-ALTER TABLE cargo ADD CONSTRAINT cargo_pk PRIMARY KEY ( id );
+ALTER TABLE cargo ADD CONSTRAINT cargo_pk PRIMARY KEY ( id_cargo );
 
 CREATE TABLE categoria (
-    id        NUMERIC(6) NOT NULL,
-    descricao VARCHAR(80) NOT NULL
+    id_categoria   NUMERIC(6) NOT NULL,
+    nome_categoria VARCHAR(80) NOT NULL
 );
 
-ALTER TABLE categoria ADD CONSTRAINT categoria_pk PRIMARY KEY ( id );
+ALTER TABLE categoria ADD CONSTRAINT categoria_pk PRIMARY KEY ( id_categoria );
 
 CREATE TABLE funcionario (
 	cracha		   NUMERIC(6)  NOT NULL UNIQUE,
@@ -39,59 +39,59 @@ ALTER TABLE funcionario ADD CONSTRAINT funcionario_pk PRIMARY KEY ( cpf );
 
 CREATE TABLE item (
     quantidade NUMERIC(6) DEFAULT 1,
-    produto_id NUMERIC(6) NOT NULL,
-    id         NUMERIC(6) NOT NULL
+    id_produto NUMERIC(6) NOT NULL,
+    id_item    NUMERIC(6) NOT NULL
 );
 
 ALTER TABLE item ADD CONSTRAINT qntd_item_ck CHECK ( quantidade >= 0 );
 
-ALTER TABLE item ADD CONSTRAINT item_pk PRIMARY KEY ( id );
+ALTER TABLE item ADD CONSTRAINT item_pk PRIMARY KEY ( id_item );
 
 CREATE TABLE pedido (
     valortotal           NUMERIC(10, 2),
-    id                   NUMERIC(6),
+    id_pedido            NUMERIC(6),
     funcionarioatendente NUMERIC(11) NOT NULL,
     descricao            VARCHAR(80),
-    item_id              NUMERIC(6) NOT NULL
+    id_item              NUMERIC(6) NOT NULL
 );
 
 ALTER TABLE pedido ADD CONSTRAINT valor_pedido_ck CHECK ( valortotal >= 0 );
 
 CREATE TABLE produto (
-    id          NUMERIC(6) NOT NULL,
-    descricao   VARCHAR(80),
-    valor       NUMERIC(10, 2) NOT NULL,
-    categoriaid NUMERIC(6) NOT NULL
+    id_produto   NUMERIC(6) NOT NULL,
+    descricao    VARCHAR(80),
+    valor        NUMERIC(10, 2) NOT NULL,
+    id_categoria NUMERIC(6) NOT NULL
 );
 
 ALTER TABLE produto ADD CONSTRAINT valor_prod_ck CHECK ( valor >= 0 );
 
-ALTER TABLE produto ADD CONSTRAINT produto_pk PRIMARY KEY ( id );
+ALTER TABLE produto ADD CONSTRAINT produto_pk PRIMARY KEY ( id_produto );
 
 ALTER TABLE funcionario
     ADD CONSTRAINT funcionario_cargo_fk FOREIGN KEY ( cargoid )
-        REFERENCES cargo ( id );
+        REFERENCES cargo ( id_cargo );
 
 ALTER TABLE funcionario
     ADD CONSTRAINT gerente_funcionario_fk FOREIGN KEY ( cpfgerente )
         REFERENCES funcionario ( cpf );
 
 ALTER TABLE item
-    ADD CONSTRAINT item_produto_fk FOREIGN KEY ( produto_id )
-        REFERENCES produto ( id );
+    ADD CONSTRAINT item_produto_fk FOREIGN KEY ( id_produto )
+        REFERENCES produto ( id_produto );
 
 ALTER TABLE pedido
     ADD CONSTRAINT pedido_funcionario_fk FOREIGN KEY ( funcionarioatendente )
         REFERENCES funcionario ( cpf );
 
 ALTER TABLE pedido
-    ADD CONSTRAINT pedido_item_fk FOREIGN KEY ( item_id )
-        REFERENCES item ( id )
+    ADD CONSTRAINT pedido_item_fk FOREIGN KEY ( id_item )
+        REFERENCES item ( id_item )
             ON DELETE CASCADE;
 
 ALTER TABLE produto
-    ADD CONSTRAINT produto_categoria_fk FOREIGN KEY ( categoriaid )
-        REFERENCES categoria ( id );
+    ADD CONSTRAINT produto_categoria_fk FOREIGN KEY ( id_categoria )
+        REFERENCES categoria ( id_categoria );
 		
 -- Povoamento
 		
@@ -113,20 +113,22 @@ insert into categoria values (3, 'Doce');
 insert into categoria values (4, 'Refeição pronta');
 insert into categoria values (5, 'Pipoca');
 
-insert into produto values (1, 'Enrolado de presunto', 2.50, 1);
-insert into produto values (2, 'Enrolado de queijo', 3.50, 1);
-insert into produto values (3, 'Pão de Queijo', 1.50, 1);
-insert into produto values (4, 'Kuat', 4.00, 2);
-insert into produto values (5, 'Guaraná Antartica', 3.50, 2);
-insert into produto values (6, 'Guarápan', 2.50, 2);
-insert into produto values (7, 'Guaraná Jesus', 1.00, 2);
-insert into produto values (8, 'Guaravita', 2.50, 2);
-insert into produto values (9, 'Dolly', 0.01, 2);
-insert into produto values (10, 'Kitkat', 1.75, 3);
-insert into produto values (11, 'Strogonoff de Frango', 12.5, 4);
-insert into produto values (12, 'Strogonoff de Palmito', 11.5, 4);
-insert into produto values (13, 'Pipoca Doce', 1.5, 5);
-insert into produto values (14, 'Pipoca de Microndas - Sabor Bacon', 11.5, 5);
+select * from produto p join categoria c on p.id_categoria=c.id_categoria where c.id_categoria=1;
+
+insert into produto values (11, 'Enrolado de presunto', 2.50, 1);
+insert into produto values (12, 'Enrolado de queijo', 3.50, 1);
+insert into produto values (13, 'Pão de Queijo', 1.50, 1);
+insert into produto values (14, 'Kuat', 4.00, 2);
+insert into produto values (15, 'Guaraná Antartica', 3.50, 2);
+insert into produto values (16, 'Guarápan', 2.50, 2);
+insert into produto values (17, 'Guaraná Jesus', 1.00, 2);
+insert into produto values (18, 'Guaravita', 2.50, 2);
+insert into produto values (19, 'Dolly', 0.01, 2);
+insert into produto values (20, 'Kitkat', 1.75, 3);
+insert into produto values (21, 'Strogonoff de Frango', 12.5, 4);
+insert into produto values (22, 'Strogonoff de Palmito', 11.5, 4);
+insert into produto values (23, 'Pipoca Doce', 1.5, 5);
+insert into produto values (24, 'Pipoca de Microndas - Sabor Bacon', 11.5, 5);
 
 insert into item values (5, 1, 1);
 insert into item values (5, 2, 2);

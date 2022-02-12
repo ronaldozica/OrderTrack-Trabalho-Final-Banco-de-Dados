@@ -24,6 +24,12 @@ async function simpleQuery() {
   return retorno;
 }
 
+async function getSalgados() {
+  const retorno = await pgClient.query("SELECT * FROM PRODUTO P JOIN CATEGORIA C ON P.id_categoria=C.id_categoria WHERE C.nome_categoria='Salgado'");
+  console.log(retorno);
+  return retorno;
+}
+
 async function connectToPG() {
   if (!isConnected) {
     isConnected = true;
@@ -32,7 +38,18 @@ async function connectToPG() {
   }
 }
 
-app.get("/query", (req, res) => {
+app.get("/salgados", (req, res) => {
+  let funcs;
+  connectToPG();
+  getSalgados().then(result => {
+    funcs = result
+    res.json({
+      message: (funcs)
+    });
+  });
+});
+
+app.get("/funcionarios", (req, res) => {
   let funcs;
   connectToPG();
   simpleQuery().then(result => {

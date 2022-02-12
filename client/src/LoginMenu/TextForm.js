@@ -23,7 +23,7 @@ const TextForm = () => {
     const handleSubmit = () => {
         if(textValue){ 
             if(!func){
-                fetch("/query")
+                fetch("/funcionarios")
                     .then((res) => {
                         res.json().then(response => {
                             console.log(response);
@@ -66,7 +66,7 @@ const TextForm = () => {
                         Insira o número do crachá, conforme demonstrado abaixo
                     </p>
 
-                    {Math.round(Math.random() * 100) === 1 ?
+                    {Math.round(Math.random() * 10) === 1 ?
                         <img src={specialBadge} alt="badge" style={{ paddingTop: '1px' }} />
                         :
                         <img src={badge} alt="badge" style={{ paddingTop: '1px' }} />
