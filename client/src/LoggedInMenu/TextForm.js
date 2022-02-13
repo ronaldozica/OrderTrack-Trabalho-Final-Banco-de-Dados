@@ -12,13 +12,36 @@ const TextForm = () => {
 
     const [textValue, setTextValue] = useState("");
     const [itemQuantity, setItemQuantity] = useState(0);
+    const [selectedItems, setSelectedItems] = useState([]);
 
     const onTextChange = (e) => setTextValue(e.target.value);
 
+    const createOrder = () => {
+        fetch("/createOrder", {
+            method: "post",
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+
+            //make sure to serialize your JSON body
+            body: JSON.stringify({
+                func: func,
+                items: selectedItems
+            })
+        })
+            .then((response) => {
+                console.log(response);
+            });
+    }
+
     const handleSubmit = () => {
-        if(textValue){
+        if ( (textValue) && (selectedItems) ) {
             setTextValue("");
             setItemQuantity(0);
+
+            createOrder();
+            setSelectedItems([]);
         }
     }
 
@@ -30,12 +53,13 @@ const TextForm = () => {
     const handleAddItems = () => setItemQuantity(itemQuantity + 1);
 
     const handleSelectItem = (value) => {
-        if(value.value === 'two')
-            setItemQuantity(itemQuantity - 1);
+        const arrayAux = selectedItems;
+        arrayAux.push(value);
+        setSelectedItems(arrayAux);
+        console.log('selectedItems: ', selectedItems);
     };
 
     const options = require('./options');
-    const optionsFirstItem = require('./optionsFirstItem');
 
     let iterateItems = itemQuantity;
 
@@ -54,28 +78,16 @@ const TextForm = () => {
 
                 {
                     [...Array(iterateItems)].map((e, i) =>
-                        i === 0 ?
-                                <Dropdown
-                                    key = {i}
-                                    className="my-className"
-                                    options={optionsFirstItem}
-                                    value="one"
-                                    onSelect={(value) => handleSelectItem(value)}
-                                    onChange={(value) => console.log('change!', value)}
-                                    onClose={(closedBySelection) => console.log('closedBySelection?:', closedBySelection)}
-                                    onOpen={() => console.log('open!')}
-                                />
-                            :
-                                <Dropdown
-                                    key = {i}
-                                    className="my-className"
-                                    options={options}
-                                    value="one"
-                                    onSelect={(value) => handleSelectItem(value)}
-                                    onChange={(value) => console.log('change!', value)}
-                                    onClose={(closedBySelection) => console.log('closedBySelection?:', closedBySelection)}
-                                    onOpen={() => console.log('open!')}
-                                />
+                        <Dropdown
+                            key={i}
+                            className="my-className"
+                            options={options}
+                            value="one"
+                            onSelect={(value) => handleSelectItem(value)}
+                            onChange={(value) => console.log('change!', value)}
+                            onClose={(closedBySelection) => console.log('closedBySelection?:', closedBySelection)}
+                            onOpen={() => console.log('open!')}
+                        />
                     )}
 
                 <Button onClick={handleSubmit}>Realizar pedido</Button>

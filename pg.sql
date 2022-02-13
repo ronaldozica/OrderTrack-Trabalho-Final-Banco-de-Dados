@@ -100,7 +100,7 @@ insert into cargo values (3,'CEO');
 insert into cargo values (4,'Desenvolvedor');
 insert into cargo values (5,'Cortador de batata');
 
-insert into funcionario values (13, 1234567866,'Alexandre', null, 1, null, 'M');
+insert into funcionario values (42069, 1234567866,'Alexandre', null, 1, null, 'M');
 insert into funcionario values (12, 1234567867,'Ronaldo', null, 1, null, 'M');
 insert into funcionario values (257, 1234567257,'Rodrigo', null, 2, null, 'M');
 insert into funcionario values (28, 1234567828,'Vitor', null, 1, null, 'M');
@@ -140,8 +140,8 @@ insert into produto values (24, 'Strogonoff de Palmito', 11.5, 4);
 insert into produto values (25, 'Pipoca Doce', 1.5, 5);
 insert into produto values (26, 'Pipoca de Microndas - Sabor Bacon', 2.5, 5);
 
-insert into item values (5, 1, 1);
-insert into item values (5, 2, 2);
+insert into item values (5, 10, 1);
+insert into item values (5, 10, 2);
 
 -- select (i.Quantidade*p.valor) from item i join produto p on i.produto_id=p.id where i.id=1;
 insert into pedido values (100, 1, 1234567866, null,1);
