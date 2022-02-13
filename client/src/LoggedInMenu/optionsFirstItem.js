@@ -1,47 +1,32 @@
-let salgados = [];
-let flagSalgados = 0;
-if(!flagSalgados){
+let produtos = [];
+let items = [];
+let flagProdutos = 0;
+if(!flagProdutos){
     let item;
-    fetch("/salgados")
+    let categoriaAtual = 0;
+    let lastCategoria;
+    produtos.push({ id: 'one', value: 'one', label: 'Selecione o item pedido' });
+    fetch("/produtos")
         .then((res) => {
             res.json().then(response => {
-                //console.log(response);
                 response.message.rows.forEach(rowsIt => {
-                    item = { id: rowsIt.id_produto, value: rowsIt.id_produto, label: rowsIt.descricao }
-                    salgados.push(item);
+                    if(categoriaAtual != rowsIt.id_categoria){
+                        produtos.push({
+                            name: lastCategoria,
+                            items: items
+                        });
+                        items = [];
+                        categoriaAtual++;
+                    }
+                    item = { id: rowsIt.id_produto, value: rowsIt.id_produto, label: rowsIt.descricao };
+                    items.push(item);
+                    lastCategoria=rowsIt.nome_categoria;
                 })
             })
         })
-    flagSalgados = 1;
+        flagProdutos = 1;
 }
 
-let bebidas = [];
-let flagBebidas = 0;
-if(!flagBebidas){
-    let item;
-    fetch("/bebidas")
-        .then((res) => {
-            res.json().then(response => {
-                //console.log(response);
-                response.message.rows.forEach(rowsIt => {
-                    item = { id: rowsIt.id_produto, value: rowsIt.id_produto, label: rowsIt.descricao }
-                    bebidas.push(item);
-                })
-            })
-        })
-    flagBebidas = 1;
-}
-
-const optionsFirstItem = [
-    { id: 'one', value: 'one', label: 'Selecione o item pedido' },
-    {
-        name: 'Lanches',
-        items: salgados
-    },
-    {
-        name: 'Bebidas',
-        items: bebidas
-    }
-];
+const optionsFirstItem = produtos;
 
 module.exports = optionsFirstItem;

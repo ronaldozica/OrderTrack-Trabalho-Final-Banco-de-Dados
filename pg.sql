@@ -6,7 +6,6 @@ drop table item;
 drop table produto;
 drop table categoria;
 
-
 -- Criação das tabelas
 CREATE TABLE cargo (
     id_cargo   NUMERIC(6) NOT NULL,
@@ -123,20 +122,23 @@ select * from funcionario;
 select * from cargo;
 select * from item;
 
-insert into produto values (11, 'Enrolado de presunto', 2.50, 1);
-insert into produto values (12, 'Enrolado de queijo', 3.50, 1);
-insert into produto values (13, 'Pão de Queijo', 1.50, 1);
-insert into produto values (14, 'Kuat', 4.00, 2);
-insert into produto values (15, 'Guaraná Antartica', 3.50, 2);
-insert into produto values (16, 'Guarápan', 2.50, 2);
-insert into produto values (17, 'Guaraná Jesus', 1.00, 2);
-insert into produto values (18, 'Guaravita', 2.50, 2);
-insert into produto values (19, 'Dolly', 0.01, 2);
-insert into produto values (20, 'Kitkat', 1.75, 3);
-insert into produto values (21, 'Strogonoff de Frango', 12.5, 4);
-insert into produto values (22, 'Strogonoff de Palmito', 11.5, 4);
-insert into produto values (23, 'Pipoca Doce', 1.5, 5);
-insert into produto values (24, 'Pipoca de Microndas - Sabor Bacon', 11.5, 5);
+insert into produto values (10, 'Empada de alho poró', 3.50, 1);
+insert into produto values (11, 'Enrolado de presunto', 3.50, 1);
+insert into produto values (12, 'Enrolado de queijo', 3.00, 1);
+insert into produto values (13, 'Coxinha', 4.00, 1);
+insert into produto values (14, 'Pão de Queijo', 1.50, 1);
+insert into produto values (15, 'Kuat', 4.00, 2);
+insert into produto values (16, 'Guaraná Antartica', 3.50, 2);
+insert into produto values (17, 'Guarapán', 2.50, 2);
+insert into produto values (18, 'Guaraná Jesus', 1.00, 2);
+insert into produto values (19, 'Guaravita', 2.50, 2);
+insert into produto values (20, 'Dolly', 0.01, 2);
+insert into produto values (21, 'Trident', 1.50, 3);
+insert into produto values (22, 'Kitkat', 1.75, 3);
+insert into produto values (23, 'Strogonoff de Frango', 12.5, 4);
+insert into produto values (24, 'Strogonoff de Palmito', 11.5, 4);
+insert into produto values (25, 'Pipoca Doce', 1.5, 5);
+insert into produto values (26, 'Pipoca de Microndas - Sabor Bacon', 2.5, 5);
 
 insert into item values (5, 1, 1);
 insert into item values (5, 2, 2);

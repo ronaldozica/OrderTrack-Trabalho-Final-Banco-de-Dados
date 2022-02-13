@@ -41,6 +41,14 @@ async function getSalgados() {
   return retorno;
 }
 
+async function getProdutos() {
+  let query = "SELECT * FROM PRODUTO P JOIN CATEGORIA C ON P.id_categoria=C.id_categoria";
+  const retorno = await pgClient.query(query);
+  //console.log(retorno);
+  return retorno;
+}
+
+
 async function connectToPG() {
   if (!isConnected) {
     isConnected = true;
@@ -48,6 +56,17 @@ async function connectToPG() {
     await pgClient.connect();
   }
 }
+
+app.get("/produtos", (req, res) => {
+  let funcs;
+  connectToPG();
+  getProdutos().then(result => {
+    funcs = result
+    res.json({
+      message: (funcs)
+    });
+  });
+});
 
 app.get("/bebidas", (req, res) => {
   let funcs;
