@@ -31,7 +31,7 @@ async function individualOrders(func, it) {
   const itemId = Math.round(Math.random() * 1000000);
 
   console.log('insert into item values (1, ' + it.id + ', ' + itemId + ');');
-  console.log('insert into pedido values (5, 2, 1234567866, \'' + func + '\', ' + itemId + ');');
+  console.log('insert into pedido values (1, 1, 1234567866, \'' + func + '\', ' + itemId + ');');
 
   await pgClient.query('insert into item values (1, ' + it.id + ', ' + itemId + ');');
   const retorno = await pgClient.query('insert into pedido values (5, 2, 1234567866, \'' + func + '\', ' + itemId + ');');
@@ -97,6 +97,13 @@ async function getBebidas() {
   return retorno;
 }
 
+async function getOrders() {
+  let query = "select pr.descricao, p.funcionarioatendente from pedido p join item i on i.id_item = p.id_item join produto pr on i.id_produto = pr.id_produto;";
+  const retorno = await pgClient.query(query);
+  //console.log(retorno);
+  return retorno;
+}
+
 async function getSalgados() {
   let salgado = "Salgado"
   let query = "SELECT * FROM PRODUTO P JOIN CATEGORIA C ON P.id_categoria=C.id_categoria WHERE C.nome_categoria='" + salgado + "'";
@@ -121,22 +128,32 @@ async function connectToPG() {
     isConnected = true;
     console.log('connect');
     await pgClient.connect();
-  }
 
-  fs.readFile('./pg.sql', 'utf8', (err, data) => {
-    if (err) {
-      console.error(err)
-      return
-    }
-    // console.log(data)
-    return populateDB(data);
-  });
+    fs.readFile('./pg.sql', 'utf8', (err, data) => {
+      if (err) {
+        console.error(err)
+        return
+      }
+      // console.log(data)
+      return populateDB(data);
+    });
+  }
 }
 
 app.get("/produtos", (req, res) => {
   let funcs;
   connectToPG();
   getProdutos().then(result => {
+    funcs = result
+    res.json({
+      message: (funcs)
+    });
+  });
+});
+
+app.get("/fetchOrders", (req, res) => {
+  let funcs;
+  getOrders().then(result => {
     funcs = result
     res.json({
       message: (funcs)

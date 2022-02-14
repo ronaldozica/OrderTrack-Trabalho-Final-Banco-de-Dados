@@ -150,3 +150,6 @@ select * from pedido;
 select * from item;
 select * from produto;
 select * from FUNCIONARIO;
+
+-- select * from pedido p join item i on i.id_item = p.id_item join produto pr on i.id_produto = pr.id_produto;
+select * from pedido p join item i on i.id_item = p.id_item join produto pr on i.id_produto = pr.id_produto;

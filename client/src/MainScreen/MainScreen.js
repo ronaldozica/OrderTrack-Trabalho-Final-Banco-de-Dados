@@ -26,7 +26,7 @@ const MainScreen = () => {
             cursor: 'pointer'
           }}
         >
-          Fazer login no sistema
+          Conectar ao banco de dados
         </button>
       </header>
     </div>
