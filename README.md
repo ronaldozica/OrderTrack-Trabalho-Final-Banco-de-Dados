@@ -122,7 +122,3 @@ Contribuições são bem-vindas! Se você encontrar problemas ou tiver sugestõe
 ## Licença
 
 Este projeto está licenciado sob a licença MIT - veja o arquivo [LICENSE](LICENSE) para mais detalhes.
-
----
-
-Se precisar de mais detalhes ou ajustes no **README**, me avise!
