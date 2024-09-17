@@ -1,7 +1,3 @@
-Aqui está um **README** completo para o seu projeto de Banco de Dados. Ele foi estruturado para fornecer uma visão geral do projeto e suas funcionalidades.
-
----
-
 # Sistema de Gerenciamento de Pedidos de Restaurante
 
 Este é um sistema de gerenciamento de pedidos desenvolvido para a disciplina de **Banco de Dados** no primeiro semestre de 2022. O projeto foi desenvolvido utilizando **React** no front-end e **Node.js** com **PostgreSQL** no back-end. O sistema permite a criação de pedidos, visualização de produtos, categorias e consultas a dados específicos armazenados no banco de dados.
